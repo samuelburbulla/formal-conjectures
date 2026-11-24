@@ -34,13 +34,18 @@ when both agents gain at least $k$ positions. Singles have rank $N$.
 namespace FanelliMoscardelli
 
 /--
-The universal rank-improvement threshold is $K(N)=\lceil N/2\rceil$ for every sufficiently
+The universal rank-improvement threshold is NOT $K(N)=\lceil N/2\rceil$ for every sufficiently
 large number of agents.
+
+Disproved for all odd $N = 2m + 1 \ge 7$ by constructively showing $K(2m + 1) \le m < m + 1 =
+\lceil (2m + 1) / 2 \rceil$ for every $m \ge 3$ (along with monotonicity $K(n) \le K(n + 1)$
+and the exact values $K(5) = K(6) = K(7) = 3$). The even-$N$ case $K(2m) = m$ remains open.
 -/
-@[category research open, AMS 5 68 91]
+@[category research solved, AMS 5 68 91,
+  formal_proof using lean4 at "https://github.com/samuelburbulla/fanelli-moscardelli-disproof/blob/f1ebd0a1bbd89d632ac093ffbd8649b7f6df5c3c/Solution.lean"]
 theorem stability_threshold_tight :
-    ∃ N₀ : ℕ, 3 ≤ N₀ ∧
-      ∀ N ≥ N₀, Roommates.stabilityThreshold N = (N + 1) / 2 := by
+    ¬ (∃ N₀ : ℕ, 3 ≤ N₀ ∧
+      ∀ N ≥ N₀, Roommates.stabilityThreshold N = (N + 1) / 2) := by
   sorry
 
 end FanelliMoscardelli
